@@ -3,51 +3,26 @@
 # Instead, edit Jeweler::Tasks in Rakefile, and run 'rake gemspec'
 # -*- encoding: utf-8 -*-
 
+require "lib/acts_as_sequence/version"
+
 Gem::Specification.new do |s|
-  s.name = %q{acts_as_sequence}
-  s.version = "0.0.1"
+  s.name              = "acts_as_sequence"
+  s.version           = ActsAsSequence::VERSION
+  s.author            = "Victor Sokolov"
+  s.email             = "gzigzigzeo@gmail.com"
+  s.homepage          = "http://github.com/gzigzigzeo/acts_as_sequence"
+  s.description       = "Emulates sequence in MySQL database. Useful when you want your newly created object to have unique id value."
+  s.summary           = "Database sequence emulation for MySQL"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Victor Sokolov"]
-  s.date = %q{2011-02-10}
-  s.description = %q{Emulates sequence in MySQL database. Useful when you want your newly created object to have unique id value.}
-  s.email = %q{gzigzigzeo@gmail.com}
-  s.extra_rdoc_files = [
-    "README.rdoc"
-  ]
-  s.files = [
-    "README.rdoc",
-    "Rakefile",
-    "init.rb",
-    "lib/acts_as_sequence.rb",
-    "lib/acts_as_sequence/acts_as_sequence.rb",
-    "lib/acts_as_sequence/railtie.rb"
-  ]
-  s.homepage = %q{http://github.com/gzigzigzeo/acts_as_sequence}
+  s.rubyforge_project = "acts_as_sequence"
+
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
-  s.summary = %q{Database sequence emulation for MySQL}
-
-  if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.specification_version = 3
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<acts_as_sequence>, [">= 0"])
-      s.add_runtime_dependency(%q<>, [">= 0"])
-      s.add_runtime_dependency(%q<activerecord>, ["~> 3.0.0"])
-      s.add_runtime_dependency(%q<activerecord>, ["~> 3.0.0"])
-    else
-      s.add_dependency(%q<acts_as_sequence>, [">= 0"])
-      s.add_dependency(%q<>, [">= 0"])
-      s.add_dependency(%q<activerecord>, ["~> 3.0.0"])
-      s.add_dependency(%q<activerecord>, ["~> 3.0.0"])
-    end
-  else
-    s.add_dependency(%q<acts_as_sequence>, [">= 0"])
-    s.add_dependency(%q<>, [">= 0"])
-    s.add_dependency(%q<activerecord>, ["~> 3.0.0"])
-    s.add_dependency(%q<activerecord>, ["~> 3.0.0"])
-  end
+  
+  s.add_dependency 'activerecord', '~> 3.0.0'
+  s.add_dependency 'activesupport', '~> 3.0.0'  
+  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'rspec'
 end
-

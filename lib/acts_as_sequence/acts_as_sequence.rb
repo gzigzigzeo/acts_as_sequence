@@ -1,18 +1,17 @@
+require 'active_support/concern'
+
 module ActsAsSequence
   module ActsAsSequence
-    extend ActiveSupport::Concern
+    extend ::ActiveSupport::Concern
 
     module ClassMethods
       def acts_as_sequenced(field, sequencer, *args)
         field = field.to_sym
         options = args.extract_options!
         sequence_name = options.delete(:sequence) || "#{field}_#{self.name.underscore}"
-        next_after_create = options.delete(:next_after_create) || true
 
-        if next_after_create
-          after_initialize do
-            write_attribute(field, sequencer.next_sequence_value(sequence_name)) if read_attribute(field).blank? && new_record?
-          end
+        after_initialize do
+          write_attribute(field, sequencer.next_sequence_value(sequence_name)) if read_attribute(field).blank? && new_record?
         end
 
         (class << self; self; end).send(:define_method, :"next_sequence_#{field}") do

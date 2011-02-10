@@ -1,16 +1,19 @@
 $LOAD_PATH << "." unless $LOAD_PATH.include?(".")
 
+require 'logger'
+require "bundler"
+  
 begin
-  require "bundler"
   Bundler.setup
-  Bundler.require
+  Bundler.require  
 rescue Bundler::GemNotFound
   raise RuntimeError, "Bundler couldn't find some gems." +
     "Did you run `bundle install`?"
 end
 
-require 'logger'
+require 'active_record'
 
+ActiveRecord::Base.send(:include, ActsAsSequence::ActsAsSequence)
 ActiveRecord::Base.establish_connection(
   "adapter" => "sqlite3", 
   "database" => ":memory:"
@@ -26,6 +29,6 @@ class Sequence < ActiveRecord::Base
 end
 
 class Item < ActiveRecord::Base
-  acts_as_sequenced :new_id1_item, Sequence
+  acts_as_sequenced :new_id1, Sequence
   acts_as_sequenced :new_id2, Sequence, :sequence => :id_2_sequence
 end

@@ -12,14 +12,15 @@ gem 'acts_as_sequence'
 
 app/models/sequence.rb:
 
-class Sequence < ActiveRecord::Base
-  acts_as_sequencer
-end
+  class Sequence < ActiveRecord::Base
+    acts_as_sequencer
+  end
 
-class Order < ActiveRecord::Base
-  acts_as_sequenced :uniq_id, Sequence
-end
+  class Order < ActiveRecord::Base
+    acts_as_sequenced :uniq_id, Sequence
+  end
 
-Order.new.uniq_id.should == 0
-Order.new.uniq_id.should == 1
-Sequence.next_sequence_value(:uniq_id).should == 2
+Following tests pass:
+  Order.new.uniq_id.should == 0
+  Order.new.uniq_id.should == 1
+  Sequence.next_sequence_value(:uniq_id).should == 2

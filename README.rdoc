@@ -2,8 +2,6 @@
 
 Emulates database sequences for MySQL. It is useful when you want to have a unique value for an unsaved object.
 
-rails g model Sequence id_order:integer
-
 = Installation
 
 gem 'acts_as_sequence'

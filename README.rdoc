@@ -1,2 +1,27 @@
-=ActsAsSequence
+= ActsAsSequence
 
+Emulates database sequences for MySQL. It is useful when you want to have a unique value for an unsaved object.
+
+rails g model Sequence id_order:integer
+
+= Installation
+
+gem 'acts_as_sequence'
+
+= Example
+
+> rails g model Sequence uniq_id_order:integer
+
+app/models/sequence.rb:
+
+class Sequence < ActiveRecord::Base
+  acts_as_sequencer
+end
+
+class Order < ActiveRecord::Base
+  acts_as_sequenced :uniq_id, Sequence
+end
+
+Order.new.uniq_id.should == 0
+Order.new.uniq_id.should == 1
+Sequence.next_sequence_value(:uniq_id).should == 2

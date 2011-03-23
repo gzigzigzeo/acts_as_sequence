@@ -13,7 +13,7 @@ end
 
 require 'active_record'
 
-ActiveRecord::Base.send(:include, ActsAsSequence::ActsAsSequence)
+ActiveRecord::Base.send(:include, ActsAsSequence::Extension)
 ActiveRecord::Base.establish_connection(
   "adapter" => "sqlite3", 
   "database" => ":memory:"

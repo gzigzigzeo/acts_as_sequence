@@ -2,7 +2,7 @@
 require 'active_support/concern'
 
 module ActsAsSequence
-  module ActsAsSequence
+  module Extension
     extend ::ActiveSupport::Concern
 
     module ClassMethods
